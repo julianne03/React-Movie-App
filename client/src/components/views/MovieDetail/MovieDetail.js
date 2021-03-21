@@ -4,7 +4,8 @@ import MainImage from '../LandingPage/Sections/MainImage'
 import MovieInfo from '../MovieDetail/Sections/MovieInfo'
 import GridCards from '../commons/GridCards'
 import Favorite from '../../views/MovieDetail/Sections/Favorite'
-import { Row } from 'antd';
+import { Row, Button } from 'antd';
+import Comment from './Sections/Comment'
 
 function MovieDetail(props) {
 
@@ -65,7 +66,7 @@ function MovieDetail(props) {
                 {/* Actors Grid */}
 
                 <div style={{ display: 'flex', justifyContent: 'center', margin: '2rem' }}>
-                    <button onClick={ toggleActorView }>Toggle Actor View</button>
+                    <Button type="primary" onClick={ toggleActorView }>Toggle Actor View</Button>
                 </div>
 
                 {ActorToggle &&
@@ -81,6 +82,9 @@ function MovieDetail(props) {
                     ))}
                     </Row>
                 }
+
+                {/* Comment */}
+                <Comment movieId={movieId} />
                 
 
 
