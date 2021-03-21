@@ -3,6 +3,7 @@ import { Button, Form } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import Axios from 'axios';
 import { useSelector } from 'react-redux';
+import SingleComment from './SingleComment';
 
 function Comment(props) {
 
@@ -20,14 +21,16 @@ function Comment(props) {
 
         const variables = {
             content: commentValue,
-            writer : user.userData.id,
-            movieId : movieId,
+            writer : user.userData._id,
+            movieId : props.movieId,
         }
+        console.log(variables);
 
         Axios.post('/api/comment/saveComment', variables)
         .then(response => {
             if(response.data.success) {
-                console.log(response.data.result)
+                setcommentValue("")
+                props.refreshFunction(response.data.result)
             } else {
                 alert('코멘트를 저장하지 못했습니다.')
             }
@@ -41,6 +44,12 @@ function Comment(props) {
             <hr />
 
             {/* Comment Lists */}
+            {props.commentLists && props.commentLists.map((comment, index) => (
+                (!comment.responseTo &&
+                    <SingleComment refreshFunction={props.refreshFunction} comment={comment} movieId={movieId} />
+                )
+                
+            ))}
 
             {/* Root Commment Form */}
 
