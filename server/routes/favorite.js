@@ -57,4 +57,13 @@ router.post('/getFavoritedMovie', (req, res) => {
         })
 })
 
+router.post('/removeFromFavoritePage', (req, res) => {
+
+    Favorite.findOneAndDelete({ movieId: req.body.movieId, userFrom: req.body.userFrom })
+    .exec((err, result) => {
+        if (err) return res.status(200).send(err)
+        return res.status(200).json({ success : true })
+    })
+})
+
 module.exports = router;
