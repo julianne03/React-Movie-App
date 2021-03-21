@@ -23,6 +23,23 @@ function FavoritePage() {
         })
     }
 
+    const onClickDelete = (movieId, userFrom) => {
+
+        const variables = {
+            movieId,
+            userFrom
+        }
+
+        Axios.post('/api/favorite/removeFromFavoritePage', variables)
+            .then(response => {
+                if (response.data.success) {
+                    fetchFavoritedMovie()
+                } else {
+                    alert("리스트에서 지우는데 실패했습니다.")
+                }
+            })
+    }
+
     const renderCards = Favorites.map((favorite, index) => {
 
         const content = (
@@ -40,7 +57,7 @@ function FavoritePage() {
         </Popover>
 
         <td>{favorite.movieRunTime} mins</td>
-        <td><Button>Remove</Button></td>
+        <td><Button onClick={() => onClickDelete(favorite.movieId, favorite.userFrom)}>Remove</Button></td>
 
     </tr>
         
