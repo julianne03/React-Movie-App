@@ -28,7 +28,7 @@ function SingleComment(props) {
 
         const variables = {
             content: CommentValue,
-            writer : user.userData.id,
+            writer : user.userData._id,
             movieId : props.movieId,
             responseTo: props.comment._id
         }
@@ -37,6 +37,7 @@ function SingleComment(props) {
         .then(response => {
             if(response.data.success) {
                 setCommentValue("")
+                setOpenReply(!OpenReply)
                 props.refreshFunction(response.data.result)
             } else {
                 alert('코멘트를 저장하지 못했습니다.')

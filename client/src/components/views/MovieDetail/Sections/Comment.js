@@ -4,6 +4,7 @@ import TextArea from 'antd/lib/input/TextArea';
 import Axios from 'axios';
 import { useSelector } from 'react-redux';
 import SingleComment from './SingleComment';
+import ReplyComment from './ReplyComment';
 
 function Comment(props) {
 
@@ -46,8 +47,12 @@ function Comment(props) {
             {/* Comment Lists */}
             {props.commentLists && props.commentLists.map((comment, index) => (
                 (!comment.responseTo &&
-                    <SingleComment refreshFunction={props.refreshFunction} comment={comment} movieId={movieId} />
-                )
+                    <React.Fragment>
+                        <SingleComment refreshFunction={props.refreshFunction} comment={comment} movieId={movieId} />
+                        <ReplyComment refreshFunction={props.refreshFunction} parentCommentId={comment._id} movieId={movieId} commentLists={props.commentLists} />
+                    </React.Fragment>
+                    
+                    )
                 
             ))}
 
