@@ -6,6 +6,7 @@ import GridCards from '../commons/GridCards'
 import Favorite from '../../views/MovieDetail/Sections/Favorite'
 import { Row, Button } from 'antd';
 import Comment from './Sections/Comment'
+import LikeDislikes from './Sections/LikeDislikes'
 import Axios from 'axios'
 
 function MovieDetail(props) {
@@ -102,6 +103,10 @@ function MovieDetail(props) {
                     ))}
                     </Row>
                 }
+
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <LikeDislikes movie movieId={movieId} userId={localStorage.getItem('userId')} />
+                </div>
 
                 {/* Comment */}
                 <Comment refreshFunction={refreshFunction} commentLists={Comments} movieId={movieId} />
